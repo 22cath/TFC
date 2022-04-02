@@ -1,0 +1,25 @@
+# TESTS
+
+# test_create_tables()
+# test_insert_db_movimiento()
+# test_consulta()
+
+
+def test_create_tables():
+    create_tables()
+
+def test_insert_into_db_movimientos():
+    datos = {
+        "fecha": "2021-01-02",
+        "hora": "11:00:00",
+        "moneda_from": "BTC",
+        "cantidad_from": 3675.25,
+        "moneda_to": "BTC",
+        "cantidad_to": 1,
+    }
+    update.datos(**datos)
+
+
+def test_consulta():
+    for i in get_recupera.datos():
+        print(i)

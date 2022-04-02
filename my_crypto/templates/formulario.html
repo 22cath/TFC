@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='../static/css/styles.css') }}">
+
+    <title>compra / venta </title>
+
+    
+</head>
+<body>
+    form action="/api/v1/movimiento" method="post">
+     
+    <form action="new_trans.html" method="get">
+        <fieldset>
+            <legend>Compra/venta</legend>
+            <br>
+               
+        <label for="moneda_from"> From: </label>
+        
+        <select name="moneda" id="moneda" required>
+            <option value="1">--selecciona una opción </option>
+            <option value="2">EUR</option>
+            <option value="3">BTC</option>
+            <option value="4">ETH</option>
+            <option value="5">BCH</option>
+            <option value="6">BNB</option>
+            <option value="7">LINK</option>
+            <option value="8">LUNA</option>
+            <option value="9">ATOM</option>
+            <option value="10">SOL</option>
+            <option value="11">USDT</option>
+        </select>
+        <br><br>
+             
+        <label for="cantidad_from">Q: </label>
+        <input type="number" name="cantidad_from" id="cantidad_from" required, value="0.00">
+
+        
+        <br>
+        
+        <br><br>
+
+        <button> <img src="/my_crypto/static/img/calculator.png" 
+            alt="imagen de una calculadora"></button>
+        <br>
+
+
+
+        <img src="/my_crypto/static/img/calculator.png" alt="una imagen de una calculadora">
+
+        <img src="/my_crypto/static/img/refresh-arrow.png" alt="imagen para botón de actualizar">
+        <br><br>
+
+        <a href="https://www.coinapi.io/" target="blank" rel="noreferrer noopener">
+            calculadora</a>
+        
+        <br><br>
+        <br><br>
+        <label for="moneda_to">
+            To: </label>
+
+            <select name="moneda" id="moneda" required>
+                <option value="1">--selecciona una opción </option>
+                <option value="2">EUR</option>
+                <option value="3">BTC</option>
+                <option value="4">ETH</option>
+                <option value="5">BCH</option>
+                <option value="6">BNB</option>
+                <option value="7">LINK</option>
+                <option value="8">LUNA</option>
+                <option value="9">ATOM</option>
+                <option value="10">SOL</option>
+                <option value="11">USDT</option>
+            </select>
+      
+        <br> <br>
+        <label for="cantidad_to">
+            Q: </label>
+        <input type="number" name="cantidad_to" id="cantidad_to">
+        <br><br>
+        <label for="PU">P.U.: </label>
+        <input type="number" name="PU" id="PU">
+        <br><br>
+
+ 
+<br><br>
+<button class="button button1">cancelar</button>
+  
+
+<button class="button button2" type="button" onclick="confirmacion()">confirmar
+    
+<script>
+    function confirmacion() {
+        var pregunta = confirm("¿Deseas grabar el movimiento?")
+        if (pregunta){
+            alert("Vamos a refrescar movimientos y status")
+            window.location = "/api/v1/movimiento";
+        }
+        else{
+            alert("Quizás en otro momento...\n Gracias de todas formas")
+        }
+    }
+    </script>
+      </button>
+<br><br>
+<button type="button" onclick="alert('Esto es un cuadro de alerta')">Probar alerta</button>
+<p></p>
+<button class="button button3" type="button" onclick="location.reload();">refrescar</button>
+
+api/v1/movimiento POST
+
+        <br>
+    </fieldset>
+        
+
+
+
+    
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/pico.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css') }}">
+        <title>my CRYPTO| {% block titulo %}{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                myCRYPTO
+            </div>
+        </header>
+        <section id="sec">
+            <div id="sec_left">
+                <div id="sec_tabla">
+                    <h1>Listado de movimientos</h1>
+                    <table border="5">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>From</th>
+                                <th>Cantidad</th>
+                                <th>To</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbbody-movimientos">
+                            <tr>
+                                <td>31/03/2022</td>
+                                <td>12:12:12</td>
+                                <td>EUR</td>
+                                <td>40.000</td>
+                                <td>BTC</td>
+                                <td>0.5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="sec_buy">
+                    <b class="legend">From: </b>
+                    <input></input>
+                    <b class="legend">Q:</b>
+                    <input></input>
+                    <button></button>
+                    <b class="legend">To:</b>
+                    <input></input>
+                </div>
+            </div>
+            <div id="sec_right">
+                <div id="sec_status">
+                    <b class="legend">Invertido: </b>
+                    <strong id="invertido"></strong>
+                    <b class="legend">Valor:</b>
+                    <strong id="valor"></strong>
+                    <b class="legend">Resultado:</b>
+                    <strong id="result"></strong>
+                    <button>+</button>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                <b>© 2022. Todos los derechos reservados</b>
+            </div>
+        </footer>
+
+        <script src="{{ url_for('static', filename='js/app.js')}}"></script>
+    </body>
+</html>

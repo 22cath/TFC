@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<!-- 
+   # revisar ancho(s) de columna de la tabla 
+   # link con JavaScript + Python
+   # boton CALCULAR devuelva la tasa de cambio actual
+-->
+
+
+</html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/index.css') }}">
+         <!--https://stackoverflow.com/questions/436411/where-should-i-put-script-tags-in-html-markup -->
+        <!-- <script src="{{ url_for('static', filename='js/app.js')}}"></script> -->
+        <title>my CRYPTO</title>
+        
+    </head>
+    <body>
+        <header>
+            <div class="row">
+               <h3><strong>my Crypto</strong></h3> 
+            </div>
+        </header>
+        <section id="lista_ppal" class="container">
+            <h3><strong>LISTA MOVIMIENTOS</strong></h3>  
+            <table class="movimientos">      
+                <thead>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Origen</th>
+                    <th>Importe</th>
+                    <th>Destino</th>
+                    <th>Importe</th>
+                </thead>
+                <tbody id="tbbody-movimientos" >	
+            </table>    
+       <!-- <form>
+            <h3><strong>NUEVO MOVIMIENTO</strong></h3>
+            <fieldset>
+                <input type="datetime" name="fecha_hora" id="fecha_hora" hidden>
+                <input type="text" id="id" hidden>
+                <label for="moneda_from"> Origen:  <span class="required">*</span> </label>                     
+                <select name="moneda" id="moneda_origen" >
+                    <option value="1">--selecciona una opción </option>
+                    <option value="2">EUR</option>
+                    <option value="3">BTC</option>
+                    <option value="4">ETH</option>
+                    <option value="5">BCH</option>
+                    <option value="6">BNB</option>
+                    <option value="7">LINK</option>
+                    <option value="8">LUNA</option>
+                    <option value="9">ATOM</option>
+                    <option value="10">SOL</option>
+                    <option value="11">USDT</option>
+                </select>
+                <label for="moneda_from"> Importe: <span class="required">*</span></label> 
+                    <input type="number" placeholder="--introduzca el importe" id="cantidad_origen">
+                <label for="moneda_to"> Destino: <span class="required">*</span></label>                        
+                    <select name="moneda" id="moneda_destino" required>
+                        <option value="1">--selecciona una opción </option>
+                        <option value="2">EUR</option>
+                        <option value="3">BTC</option>
+                        <option value="4">ETH</option>
+                        <option value="5">BCH</option>
+                        <option value="6">BNB</option>
+                        <option value="7">LINK</option>
+                        <option value="8">LUNA</option>
+                        <option value="9">ATOM</option>
+                        <option value="10">SOL</option>
+                        <option value="11">USDT</option>
+                    </select>
+
+                    
+                <a class="button"  href="#">Calcular<span class="material-icons-outlined">
+                    calculate
+                   </span>
+                </a>
+
+                <button class="button" id="boton_calcular" onclick="Calcular()">
+                    <p>Calcular</p>
+                    <img src="static\img\outline_calculate_black_24dp.png">
+                </button>
+                <label for="tasa_cambio"> Tasa de cambio actual: </label>
+                    <input type="number" placeholder="--valor actual" id="tasa">
+                
+                <label for="moneda_to"> Importe: </label> 
+                    <input type="number" placeholder="--campo calculado" id="cantidad_destino">
+
+                <div class="float-right">
+                    <input type="checkbox" id="confirmField">
+                    <label class="label-inline" for="confirmField">Enviarme una copia</label>
+                </div>
+                <input class="button-primary" type="reset" id= "boton_cancelar" value="Cancelar">
+                <input class="button-primary" type="submit" onclick="confirmacion()" id= "boton_confirmar" value="Confirmar">
+                <input type="hidden" name="datetime" id="datetime">
+                
+            </fieldset>
+        </form>
+        <form>
+            <h3><strong>STATUS</strong></h3>
+            <fieldset> Invertido: </label> 
+                <input type="number" placeholder="--€" id="eur_invertidos">
+            <fieldset>Valor: </label> 
+                <input type="number" placeholder="--€" id="valor_criptos_eur">
+            <fieldset>Resultado: </label> 
+                <input type="number" placeholder="--€" id="resultado">
+            
+            <button class="button"  onClick="window.location.href=window.location.href">
+                <p>Refrescar</p>
+                <img src="static\img\outline_refresh_black_24dp.png">
+            </button>
+               
+            </fieldset>
+
+        </form>
+    -->
+    </body>
+    <footer>© 2022. Todos los derechos reservados</footer>
+
+</html>

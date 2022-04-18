@@ -1,74 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/pico.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css') }}">
-        <title>my CRYPTO| {% block titulo %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/index.css') }}">
+         <!--https://stackoverflow.com/questions/436411/where-should-i-put-script-tags-in-html-markup -->
+        
+        <title>my CRYPTO</title>
+        
     </head>
     <body>
         <header>
-            <div class="container">
-                myCRYPTO
+            <div class="row">
+               <h3><strong>my Crypto</strong></h3> 
             </div>
         </header>
-        <section id="sec">
-            <div id="sec_left">
-                <div id="sec_tabla">
-                    <h1>Listado de movimientos</h1>
-                    <table border="5">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Hora</th>
-                                <th>From</th>
-                                <th>Cantidad</th>
-                                <th>To</th>
-                                <th>Cantidad</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbbody-movimientos">
-                            <tr>
-                                <td>31/03/2022</td>
-                                <td>12:12:12</td>
-                                <td>EUR</td>
-                                <td>40.000</td>
-                                <td>BTC</td>
-                                <td>0.5</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="sec_buy">
-                    <b class="legend">From: </b>
-                    <input></input>
-                    <b class="legend">Q:</b>
-                    <input></input>
-                    <button></button>
-                    <b class="legend">To:</b>
-                    <input></input>
-                </div>
-            </div>
-            <div id="sec_right">
-                <div id="sec_status">
-                    <b class="legend">Invertido: </b>
-                    <strong id="invertido"></strong>
-                    <b class="legend">Valor:</b>
-                    <strong id="valor"></strong>
-                    <b class="legend">Resultado:</b>
-                    <strong id="result"></strong>
-                    <button>+</button>
-                </div>
-            </div>
-        </section>
-        <footer>
-            <div class="container">
-                <b>© 2022. Todos los derechos reservados</b>
-            </div>
+        <!--https://stackoverflow.com/questions/6939864/what-is-the-difference-between-section-and-div-->
+        <!-- TODO: Estudiar como sería caragr tabla usando Jinja2 pros y cons-->
+        <section class="container">
+            <h3><strong>LISTA MOVIMIENTOS</strong></h3>  
+            <table class="movimientos">      
+                <thead>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Origen</th>
+                    <th>Importe</th>
+                    <th>Destino</th>
+                    <th>Importe</th>
+                </thead>
+                <tbody id="tbbody-movimientos" >
+                </tbody>	
+            </table>  
+        </section>       
+        
+        <footer>© 2022. Todos los derechos reservados
+
         </footer>
 
-        <script src="{{ url_for('static', filename='js/app.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/app.js')}}"></script> 
+    
     </body>
 </html>

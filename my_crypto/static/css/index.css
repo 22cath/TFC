@@ -1,0 +1,35 @@
+header {
+    padding-left: 30px;
+   
+    background-color:#9b4dca;
+    display: flex;
+    position: relative;
+    color: white;
+ }
+ 
+.required {
+    color: #e9405c;
+}
+
+.movimientos {
+    display: block;
+    overflow-y: auto;
+    height: 320px;
+}
+
+h3{
+    padding-top: 20px;
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    
+}
+.button img{
+    height: 24px;
+    width: 24px;
+    margin-top: auto;
+    margin-bottom: auto;
+    filter: brightness(0) invert(1);
+}

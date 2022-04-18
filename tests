@@ -4,9 +4,42 @@
 # test_insert_db_movimiento()
 # test_consulta()
 
+# TESTS
+def test_create_tables():
+    create_tables()
+
+def test_insert_db_movimiento():
+    from random import random
+    from random import randrange
+    from random import choices
+
+    monedas = ["EUR", "BTC", "ETH", "BCH", "BNB", "LINK", "LUNA", "ATOM", "SOL", "USDT"]
+
+    # esto semanticamente no tiene sentido 100%
+    # TODO hacer bot de compra
+    elegidas = choices(monedas, k=2)  # k =2 => dos diferentes
+    datos = {
+        "fecha": f"2021-01-{randrange(1,10)}",
+        "hora": f"{randrange(1,12)}:00:00",
+        "from_moneda": elegidas[0],
+        "from_cantidad": round(random() * randrange(1, 100), 4),
+        "to_moneda": elegidas[1],
+        "to_cantidad": round(random() * randrange(1, 100), 4),
+    }
+    insertar_movimiento(**datos)
+
+
 
 def test_create_tables():
     create_tables()
+
+
+# test_create_tables()
+# for i in range(20):
+#     test_insert_db_movimiento()
+#     print("hl")
+# test_consulta()
+
 
 def test_insert_into_db_movimientos():
     datos = {

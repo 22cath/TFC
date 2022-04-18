@@ -1,42 +1,14 @@
-const peticionarioMovimientos = new XMLHttpRequest()
+
+// https://stackoverflow.com/questions/35549547/fetch-api-vs-xmlhttprequest
+// https://hacks.mozilla.org/2015/03/this-api-is-so-fetching/
+const peticionarioMovimientos = new XMLHttpRequest();
+const requestAPI = new XMLHttpRequest();
+// let movimientos;
 
 
 function listaMovimientos() {
     const campos = ['fecha', 'hora', 'from_moneda', 'from_cantidad', 'to_moneda', 'to_cantidad']; 
-    
-    if (this.readyState === 4 && this.status === 200) {
-        // traduce el texto recibido en un objeto de js con JSON.parse
-        const movimientos = JSON.parse(this.responseText)
-
-        const tbody = document.querySelector("#tbbody-movimientos")
-
-        //tbody.innerHTML = ""
-
-        for (let i = 0; i < movimientos.length; i++) {
-            const fila = document.createElement('tr')
-            const movimiento = movimientos[i]
-            
-            for (const campo of campos) {
-                const celda = document.createElement('td')
-                celda.innerHTML = movimiento[campo]
-                fila.appendChild(celda)
-            }
-            tbody.appendChild(fila)
-        }
-    } else {
-        alert("Ups...Se ha producido un error al cargar los movimientos.")
-    }
-}
-
-peticionarioMovimientos.open("GET", "http://127.0.0.1:5000/api/v1/movimientos", true)
-peticionarioMovimientos.onload = listaMovimientos
-peticionarioMovimientos.send()
-
-
-
-
-    
-    //let url = 'http://127.0.0.1:5000/api/v1/movimientos';
+    let url = 'http://127.0.0.1:5000/api/v1/movimientos';
     // var movimientos; 
     // https://stackoverflow.com/questions/45018338/javascript-fetch-api-how-to-save-output-to-variable-as-an-object-not-the-prom
     /*fetch('https://jsonplaceholder.typicode.com/posts/1')
@@ -44,7 +16,51 @@ peticionarioMovimientos.send()
     .then(data => obj = data)
     .then(() => console.log(obj))*/
 
+    /*
 
+.then((response) => {
+return response.json()
+})
+.then((albums) => {
+albums.forEach(function (elem) {
+tpl += '<a href="' + elem.url + '">'
++ '<img src="' + elem.thumbnailUrl + '"/>',
++ '</a>',
++ '<br/>',
++ '<span>' + elem.title + '</span>';
+});
+respuestaHTML.innerHTML = tpl;
+});
+
+    */
+    // TODO: check status == success
+    fetch(url).then((res) =>{return  res.json()})
+    .then((movimientos) =>{movimientos["data"].forEach(function (elem){
+        console.log("Un movimeinto");
+        console.log(elem["from_moneda"]);
+    }) });
+    
+    // this.readyState === 4 &&
+    /*if (this.status === 200 ) {
+        movimientos = JSON.parse(this.responseText);
+       
+        const tbody = document.querySelector("#tbbody-movimientos");
+        tbody.innerHTML = "";
+
+        for (let i = 0; i < movimientos.length; i++) {
+            const fila = document.createElement('tr');
+
+            const movimiento = movimientos[i];
+            
+            for (const campo of campos) {
+                const celda = document.createElement('td');
+                celda.innerHTML = movimiento[campo];
+                fila.appendChild(celda);
+            }
+            tbody.appendChild(fila);
+        }
+    }*/ 
+}
 
 
 /*

@@ -65,14 +65,14 @@ def get_todos_movimientos():
     cursor.execute(statement)
     return cursor.fetchall()
 
-""""
+
 def get_movimiento_by_id(id_):
     db = get_db()
     cursor = db.cursor()
     statement = "SELECT * FROM movimientos WHERE id = ?"
     cursor.execute(statement, [id_])
     return cursor.fetchall()
-"""
+
 
 def get_saldo(moneda):
     """El saldo de una sola moneda"""

@@ -12,9 +12,9 @@ function listaMovimientos() {
 
         //tbody.innerHTML = ""
 
-        for (let i = 0; i < movimientos.length; i++) {
+        for (let i = 0; i < movimientos.data.length; i++) {
             const fila = document.createElement('tr')
-            const movimiento = movimientos[i]
+            const movimiento = movimientos.data[i]
             
             for (const campo of campos) {
                 const celda = document.createElement('td')
@@ -27,10 +27,15 @@ function listaMovimientos() {
         alert("Ups...Se ha producido un error al cargar los movimientos.")
     }
 }
+//function pideMovimientosHttp() {    
+    peticionarioMovimientos.onload = listaMovimientos
+    peticionarioMovimientos.open("GET", "api/v1/movimientos", true)
+    
+    peticionarioMovimientos.send()
+  //  }
 
-peticionarioMovimientos.open("GET", "http://127.0.0.1:5000/api/v1/movimientos", true)
-peticionarioMovimientos.onload = listaMovimientos
-peticionarioMovimientos.send()
+//pideMovimientosHttp()
+
 
 
 
@@ -48,7 +53,7 @@ peticionarioMovimientos.send()
 
 
 /*
-// qué hago con la fecha + infoTasa devuelve un string - puedo calcular con ello?
+
 function infoTasaEspecifica(){
 
     var infoHTML = document.querySelector("#info");

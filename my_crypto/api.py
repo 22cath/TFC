@@ -8,6 +8,7 @@ from flask import jsonify
 from flask import abort
 from flask import request
 
+
 import sqlite3
 from my_crypto.db import create_tables
 from my_crypto.db import insertar_movimiento
@@ -33,7 +34,10 @@ def movimientos():
     json_response = {"status": "success", "data": [dict(row) for row in movimientos]}
     return jsonify(json_response)
 
-#@app.route("/api/v1/movimiento/<id_>", methods=["GET"])
+    
+
+
+"""@app.route("/api/v1/movimiento/<id_>", methods=["GET"])
 # Forma parte del enunciado?? Sentido?
 #def movimiento(id_):
 #    movimiento = get_movimiento_by_id(id_)
@@ -41,7 +45,7 @@ def movimientos():
 #    if len(movimiento) == 0:
 #        abort(400)
 #   return jsonify(json_response)
-
+"""
 @app.route("/api/v1/movimiento/", methods=["POST"])
 def grabar_movimiento():
     nuevo_movimiento = request.get_json()
@@ -187,6 +191,9 @@ def resource_not_found(e):
 # https://flask.palletsprojects.com/en/2.0.x/patterns/packages/
 # https://parzibyte.me/blog/en/2020/11/12/creating-api-rest-with-python-flask-sqlite3/#Creating_the_API_with_Flask_and_Python
 
+
 # https://hoppscotch.io/ para probar APIs
 # https://flask.palletsprojects.com/en/2.0.x/errorhandling/
 # https://en.wikipedia.org/wiki/Web_API
+
+# https://parzibyte.me/blog/en/2020/11/10/enable-cors-flask-app/

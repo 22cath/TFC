@@ -39,7 +39,7 @@
                 </thead>
                 <tbody id="tbbody-movimientos" >	
             </table>   
-            <form>
+            <form name="nuevomov">
                 <h3><strong>NUEVO MOVIMIENTO</strong></h3>
                 <fieldset>
                 <input type="datetime" name="fecha_hora" id="fecha_hora" hidden>
@@ -47,39 +47,41 @@
                 <label for="moneda_from"> Origen:  <span class="required">*</span> </label>                     
                 <select name="moneda" id="moneda_origen" >
                     <option value="1">--selecciona una opción </option>
-                    <option value="2">EUR</option>
-                    <option value="3">BTC</option>
-                    <option value="4">ETH</option>
-                    <option value="5">BCH</option>
-                    <option value="6">BNB</option>
-                    <option value="7">LINK</option>
-                    <option value="8">LUNA</option>
-                    <option value="9">ATOM</option>
-                    <option value="10">SOL</option>
-                    <option value="11">USDT</option>
+                    <option value="EUR">EUR</option>
+                        <option value="BTC">BTC</option>
+                        <option value="ETH">ETH</option>
+                        <option value="BCH">BCH</option>
+                        <option value="BNB">BNB</option>
+                        <option value="LINK">LINK</option>
+                        <option value="LUNA">LUNA</option>
+                        <option value="ATOM">ATOM</option>
+                        <option value="SOL">SOL</option>
+                        <option value="USDT">USDT</option>
                 </select>
                 <label for="moneda_from"> Importe: <span class="required">*</span></label> 
                     <input type="number" placeholder="--introduzca el importe" id="cantidad_origen">
                 <label for="moneda_to"> Destino: <span class="required">*</span></label>                        
                     <select name="moneda" id="moneda_destino" required>
                         <option value="1">--selecciona una opción </option>
-                        <option value="2">EUR</option>
-                        <option value="3">BTC</option>
-                        <option value="4">ETH</option>
-                        <option value="5">BCH</option>
-                        <option value="6">BNB</option>
-                        <option value="7">LINK</option>
-                        <option value="8">LUNA</option>
-                        <option value="9">ATOM</option>
-                        <option value="10">SOL</option>
-                        <option value="11">USDT</option>
+                        <option value="EUR">EUR</option>
+                        <option value="BTC">BTC</option>
+                        <option value="ETH">ETH</option>
+                        <option value="BCH">BCH</option>
+                        <option value="BNB">BNB</option>
+                        <option value="LINK">LINK</option>
+                        <option value="LUNA">LUNA</option>
+                        <option value="ATOM">ATOM</option>
+                        <option value="SOL">SOL</option>
+                        <option value="USDT">USDT</option>
                 </select>
-                <button class="button" id="boton_calcular" onclick="Calcular()">
+                 <!-- https://stackoverflow.com/questions/932653/how-to-prevent-buttons-from-submitting-forms -->
+                <button class="button" type= "button" id="boton_calcular" onclick="calcular_tasa_cambio()">
                     <p>Calcular</p>
                     <img src="static\img\outline_calculate_black_24dp.png">
                 </button>
                 <label for="tasa_cambio"> Tasa de cambio actual: </label>
-                    <input type="output" placeholder="--valor actual" id="tasa">
+                <!-- TODO: bloquear el valor para que no se pueda escribir en tasa "que se ponga gris"  -->
+                <input type="number" placeholder="--valor actual" id="tasa" disabled>
                 
                 <label for="moneda_to"> Importe: </label> 
                     <input type="number" placeholder="--campo calculado" id="cantidad_destino">
@@ -94,7 +96,7 @@
                 
             </fieldset>
         </form>
-        <form>
+        <section id=" status">
             <h3><strong>STATUS</strong></h3>
             <fieldset> Invertido: </label> 
                 <input type="number" placeholder="--€" id="eur_invertidos">
@@ -107,10 +109,10 @@
                 <p>Refrescar</p>
                 <img src="static\img\outline_refresh_black_24dp.png">
             </button>
-               
+             
             </fieldset>
 
-        </form>
+        </section>
     </body>
     <script src="{{ url_for('static', filename='js/app.js')}}"></script>
     <footer>© 2022. Todos los derechos reservados</footer>

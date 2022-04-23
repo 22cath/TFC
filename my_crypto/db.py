@@ -1,5 +1,6 @@
 # from asyncio.windows_events import CONNECT_PIPE_INIT_DELAY
 from datetime import date
+from datetime import time
 from datetime import datetime
 import sqlite3
 
@@ -72,7 +73,17 @@ def get_movimiento_by_id(id_):
     statement = "SELECT * FROM movimientos WHERE id = ?"
     cursor.execute(statement, [id_])
     return cursor.fetchall()
+""""
+def date_now():
+    now = datetime.today()
+    fecha = now.strftime("%d/%m/%y")
+    return fecha
 
+def time_now():
+    now = datetime.todaynow()
+    hora = now.strftime("%H:%M:%S")
+    return hora
+"""
 
 def get_saldo(moneda):
     """El saldo de una sola moneda"""

@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 
-<!-- 
-   # revisar ancho(s) de columna de la tabla 
-   # boton CALCULAR devuelva la tasa de cambio actual
-   # campo calculado
--->
-
-
 </html>
     <head>
         <meta charset="UTF-8">
@@ -39,46 +32,52 @@
                 </thead>
                 <tbody id="tbbody-movimientos" >	
             </table>   
-            <form name="nuevomov">
+            <form action="procesar.html" id="formulario" >
                 <h3><strong>NUEVO MOVIMIENTO</strong></h3>
                 <fieldset>
-                <input type="datetime" name="fecha_hora" id="fecha_hora" hidden>
+                <input type="date" name="fecha" id="fecha" hidden>
+                <input type="time" name="hora" id="hora" hidden>
                 <input type="text" id="id" hidden>
                 <label for="moneda_from"> Origen:  <span class="required">*</span> </label>                     
-                <select name="moneda" id="moneda_origen" >
-                    <option value="1">--selecciona una opción </option>
+                <select name="moneda_origen"  class="form-control"  required id="moneda_origen" >
+                    <option value="0">--selecciona una opción </option>
                     <option value="EUR">EUR</option>
-                        <option value="BTC">BTC</option>
-                        <option value="ETH">ETH</option>
-                        <option value="BCH">BCH</option>
-                        <option value="BNB">BNB</option>
-                        <option value="LINK">LINK</option>
-                        <option value="LUNA">LUNA</option>
-                        <option value="ATOM">ATOM</option>
-                        <option value="SOL">SOL</option>
-                        <option value="USDT">USDT</option>
+                    <option value="BTC">BTC</option>
+                    <option value="ETH">ETH</option>
+                    <option value="BCH">BCH</option>
+                    <option value="BNB">BNB</option>
+                    <option value="LINK">LINK</option>
+                    <option value="LUNA">LUNA</option>
+                    <option value="ATOM">ATOM</option>
+                    <option value="SOL">SOL</option>
+                    <option value="USDT">USDT</option>
                 </select>
-                <label for="moneda_from"> Importe: <span class="required">*</span></label> 
-                    <input type="number" placeholder="--introduzca el importe" id="cantidad_origen">
+                <label for="cantidad_from"> Importe: <span class="required">*</span></label> 
+                    <input type="number" class="form-control" placeholder="--introduzca el importe" required id="cantidad_origen">
                 <label for="moneda_to"> Destino: <span class="required">*</span></label>                        
-                    <select name="moneda" id="moneda_destino" required>
-                        <option value="1">--selecciona una opción </option>
-                        <option value="EUR">EUR</option>
-                        <option value="BTC">BTC</option>
-                        <option value="ETH">ETH</option>
-                        <option value="BCH">BCH</option>
-                        <option value="BNB">BNB</option>
-                        <option value="LINK">LINK</option>
-                        <option value="LUNA">LUNA</option>
-                        <option value="ATOM">ATOM</option>
-                        <option value="SOL">SOL</option>
-                        <option value="USDT">USDT</option>
+                <select name="moneda" class="form-control" required id="moneda_destino">
+                    <option value="0">--selecciona una opción </option>
+                    <option value="EUR">EUR</option>
+                    <option value="BTC">BTC</option>
+                    <option value="ETH">ETH</option>
+                    <option value="BCH">BCH</option>
+                    <option value="BNB">BNB</option>
+                    <option value="LINK">LINK</option>
+                    <option value="LUNA">LUNA</option>
+                    <option value="ATOM">ATOM</option>
+                    <option value="SOL">SOL</option>
+                    <option value="USDT">USDT</option>
                 </select>
-                 <!-- https://stackoverflow.com/questions/932653/how-to-prevent-buttons-from-submitting-forms -->
-                <button class="button" type= "button" id="boton_calcular" onclick="calcular_tasa_cambio()">
+                 <!-- https://stackoverflow.com/questions/932653/how-to-prevent-buttons-from-submitting-forms  onclick="validarBotonCalcular()"-->
+                 <!-- https://www.tutorialspoint.com/how-do-i-run-two-or-more-functions-when-using-onclick-javascript-->
+                <button class="button" type="button" id="boton_calcular" >
                     <p>Calcular</p>
                     <img src="static\img\outline_calculate_black_24dp.png">
                 </button>
+                   
+                <!-- <div id="mensaje_error"></div>  --> 
+            
+
                 <label for="tasa_cambio"> Tasa de cambio actual: </label>
                 <!-- TODO: bloquear el valor para que no se pueda escribir en tasa "que se ponga gris"  -->
                 <input type="number" placeholder="--valor actual" id="tasa" disabled>
@@ -86,24 +85,21 @@
                 <label for="moneda_to"> Importe: </label> 
                     <input type="number" placeholder="--campo calculado" id="cantidad_destino">
 
-                <div class="float-right">
-                    <input type="checkbox" id="confirmField">
-                    <label class="label-inline" for="confirmField">Enviarme una copia</label>
-                </div>
                 <input class="button-primary" type="reset" id= "boton_cancelar" value="Cancelar">
-                <input class="button-primary" type="submit" onclick="confirmacion()" id= "boton_confirmar" value="Confirmar">
+                <input class="button-primary" type="submit" onclick="confirmar()" id= "boton_confirmar" value="Confirmar">
                 <input type="hidden" name="datetime" id="datetime">
+                
                 
             </fieldset>
         </form>
-        <section id=" status">
+        <section id="status">
             <h3><strong>STATUS</strong></h3>
             <fieldset> Invertido: </label> 
-                <input type="number" placeholder="--€" id="eur_invertidos">
+                <input type="number" placeholder="--€" id="eur_invertidos" disabled>
             <fieldset>Valor: </label> 
-                <input type="number" placeholder="--€" id="valor_criptos_eur">
+                <input type="number" placeholder="--€" id="valor_criptos_eur" disabled>
             <fieldset>Resultado: </label> 
-                <input type="number" placeholder="--€" id="resultado">
+                <input type="number" placeholder="--€" id="resultado" disabled>
             
             <button class="button"  onClick="window.location.href=window.location.href">
                 <p>Refrescar</p>

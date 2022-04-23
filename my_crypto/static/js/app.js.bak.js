@@ -13,6 +13,31 @@
 const peticionarioMovimientos = new XMLHttpRequest()
 const requestAPI = new XMLHttpRequest()
 
+function errorMessage(response, error) {
+    const errorMessageDiv = document.querySelector("#error-message");
+    const errorHTML = `<p>${error}: ${response.message}</p>`;
+    errorMessageDiv.innerHTML = errorHTML;
+}
+
+/*function errorMessageForm(message) {
+    const errorMessageDiv = document.querySelector("#mensaje_error");
+    const errorHTML = `<p>${message}</p>`;
+    errorMessageDiv.innerHTML = errorHTML;
+} */
+
+
+/*const listaMonedas = [
+    "EUR",
+    "BTC",
+    "ETH",
+    "BCH",
+    "BNB",
+    "LINK",
+    "LUNA",
+    "ATOM",
+    "USDT",
+];
+
 function listaMovimientos() {
     const campos = ['fecha', 'hora', 'from_moneda', 'from_cantidad', 'to_moneda', 'to_cantidad']; 
     
@@ -47,8 +72,31 @@ function pideMovimientosHttp() {
 
 pideMovimientosHttp()
 */
-
-/* function httpGet(theUrl) {
+/*
+function listaMovimientos() {
+    const campos = ['fecha', 'hora', 'from_moneda', 'from_cantidad', 'to_moneda', 'to_cantidad'];
+    let url = 'api/v1/movimientos';
+    fetch(url).then((res) => { return res.json() })
+        .then((movimientos) => {
+            if (movimientos["status"] == "success") {
+                movimientos["data"].forEach(function (movimiento) {
+                    const tbody = document.querySelector("#tbbody-movimientos");
+                    const fila = document.createElement('tr');
+                    for (const campo of campos) {
+                        const celda = document.createElement('td');
+                        celda.innerHTML = movimiento[campo];
+                        fila.appendChild(celda);
+                    }
+                    tbody.appendChild(fila);
+                })
+            } 
+        //else {
+        //    alert("Ups...Se ha producido un error al cargar los movimientos.");
+        //}
+        });
+}
+/*
+function httpGet(theUrl) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
     xmlHttp.send(null);
@@ -58,3 +106,6 @@ pideMovimientosHttp()
     httpGet(url) 
 }
 */
+
+// VALIDACION FORMULARIO
+// https://parzibyte.me/blog/2021/04/12/validar-formularios-javascript/

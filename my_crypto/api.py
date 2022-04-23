@@ -65,12 +65,11 @@ def tasa_cambio(from_moneda, to_moneda, from_cantidad):
         "status": "fail",
         "mensaje": f"No tienes suficiente saldo de {from_moneda}",
     }
-    print(from_moneda, from_cantidad, "Saldo", get_saldo(from_moneda))
+    #print(from_moneda, from_cantidad, "Saldo", get_saldo(from_moneda))
     if float(from_cantidad) > get_saldo(from_moneda):
         return jsonify(no_saldo_response), 400
     else:
         return jsonify(json_response)
-
 
 @app.route("/api/v1/movimiento", methods=["POST"])
 def grabar_movimiento():
@@ -113,6 +112,7 @@ def grabar_movimiento():
             return (jsonify(json_response), 201)
         else:
             return (jsonify(json_response), 200)
+
     # Esta es la excepción padre, cuidado! captura todos los errores
     except BaseException as e:
         traceback.print_exc()
@@ -134,7 +134,7 @@ def valor_actual_criptos():
     response = urllib.request.urlopen(api_url)
     json_response = json.loads(response.read().decode("utf-8"))
     # import json
-
+    
     # with open("my_crypto/rates.json") as f:
     #     json_response = json.load(f)
 

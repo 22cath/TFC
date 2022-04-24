@@ -49,8 +49,8 @@ Volver a comentar la función.
 Puede obtener un APIKEY gratis en este link: 
 https://www.coinapi.io/pricing?apikey
 
-## Fichero .config
-Copiar el fichero .config_template, renombrarlo a .config
+## Fichero .env
+Copiar el fichero .env_template, renombrarlo a .env
 Introducir el APIKEY en el campo indicado.
 
 # START

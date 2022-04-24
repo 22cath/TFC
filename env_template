@@ -1,0 +1,3 @@
+FLASK_APP=my_crypto
+FLASK_ENV=<development | production>
+API_KEY=Introduce tu APIKEY aqui

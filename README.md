@@ -38,12 +38,12 @@ pip install -r requirements.txt
 Con pip freeze revisa que todas las librerías esten instaladas.
 
 ## Base de datos
-Crear una nueva vacía aquí con (crea_tablas.sql) - O bien haber entregado base de datos vacía como parte del repositorio
-
-Verificar en db.py
-    DATABASE_NAME = "my_crypto.db"
-Verificar en config.py
-    DATABASE_NAME="my_crypto/movimientos.db"
+Crear una nueva base de datos, entrando en el fichero 
+Descomentar en fichero api.py linea 202 la función 
+    test_create_tables()
+Ejecutar el programa con un flask run
+Comprobar que se ha creado bien.
+Volver a comentar la función.
 
 ## Obtener un APIKEY
 Puede obtener un APIKEY gratis en este link: 

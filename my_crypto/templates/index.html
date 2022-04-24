@@ -1,116 +1,120 @@
 <!DOCTYPE html>
 
-</html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
-        <link rel="stylesheet" href="{{url_for('static', filename='css/index.css') }}">
-        <title>my CRYPTO</title>
-        
-    </head>
-    <body>
-        <header>
-            <div class="row">
-               <h3><strong>my Crypto</strong></h3> 
-            </div>
-        </header>
-        <section id="lista_ppal" class="container">
-            <h3><strong>LISTA MOVIMIENTOS</strong></h3>  
-            <table class="movimientos">      
-                <thead>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Origen</th>
-                    <th>Importe</th>
-                    <th>Destino</th>
-                    <th>Importe</th>
-                </thead>
-                <tbody id="tbbody-movimientos" >	
-            </table>   
-            <form action="procesar.html" id="formulario" >
-                <h3><strong>NUEVO MOVIMIENTO</strong></h3>
-                <fieldset>
-                <input type="date" name="fecha" id="fecha" hidden>
-                <input type="time" name="hora" id="hora" hidden>
-                <input type="text" id="id" hidden>
-                <label for="moneda_from"> Origen:  <span class="required">*</span> </label>                     
-                <select name="moneda_origen"  class="form-control"  required id="moneda_origen" >
-                    <option value="0">--selecciona una opción </option>
-                    <option value="EUR">EUR</option>
-                    <option value="BTC">BTC</option>
-                    <option value="ETH">ETH</option>
-                    <option value="BCH">BCH</option>
-                    <option value="BNB">BNB</option>
-                    <option value="LINK">LINK</option>
-                    <option value="LUNA">LUNA</option>
-                    <option value="ATOM">ATOM</option>
-                    <option value="SOL">SOL</option>
-                    <option value="USDT">USDT</option>
-                </select>
-                <label for="cantidad_from"> Importe: <span class="required">*</span></label> 
-                    <input type="number" class="form-control" placeholder="--introduzca el importe" required id="cantidad_origen">
-                <label for="moneda_to"> Destino: <span class="required">*</span></label>                        
-                <select name="moneda" class="form-control" required id="moneda_destino">
-                    <option value="0">--selecciona una opción </option>
-                    <option value="EUR">EUR</option>
-                    <option value="BTC">BTC</option>
-                    <option value="ETH">ETH</option>
-                    <option value="BCH">BCH</option>
-                    <option value="BNB">BNB</option>
-                    <option value="LINK">LINK</option>
-                    <option value="LUNA">LUNA</option>
-                    <option value="ATOM">ATOM</option>
-                    <option value="SOL">SOL</option>
-                    <option value="USDT">USDT</option>
-                </select>
-                 <!-- https://stackoverflow.com/questions/932653/how-to-prevent-buttons-from-submitting-forms  onclick="validarBotonCalcular()"-->
-                 <!-- https://www.tutorialspoint.com/how-do-i-run-two-or-more-functions-when-using-onclick-javascript-->
-                <button class="button" type="button" id="boton_calcular" >
-                    <p>Calcular</p>
-                    <img src="static\img\outline_calculate_black_24dp.png">
-                </button>
-                   
-                <!-- <div id="mensaje_error"></div>  --> 
-            
 
-                <label for="tasa_cambio"> Tasa de cambio actual: </label>
-                <!-- TODO: bloquear el valor para que no se pueda escribir en tasa "que se ponga gris"  -->
-                <input type="number" placeholder="--valor actual" id="tasa" disabled>
-                
-                <label for="moneda_to"> Importe: </label> 
-                    <input type="number" placeholder="--campo calculado" id="cantidad_destino">
+<html>
 
-                <input class="button-primary" type="reset" id= "boton_cancelar" value="Cancelar">
-                <input class="button-primary" type="submit" onclick="confirmar()" id= "boton_confirmar" value="Confirmar">
-                <input type="hidden" name="datetime" id="datetime">
-                
-                
-            </fieldset>
-        </form>
-        <section id="status">
-            <h3><strong>STATUS</strong></h3>
-            <fieldset> Invertido: </label> 
-                <input type="number" placeholder="--€" id="eur_invertidos" disabled>
-            <fieldset>Valor: </label> 
-                <input type="number" placeholder="--€" id="valor_criptos_eur" disabled>
-            <fieldset>Resultado: </label> 
-                <input type="number" placeholder="--€" id="resultado" disabled>
-            
-            <button class="button"  onClick="window.location.href=window.location.href">
-                <p>Refrescar</p>
-                <img src="static\img\outline_refresh_black_24dp.png">
-            </button>
-             
-            </fieldset>
-
-        </section>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css') }}">
+    <!--https://stackoverflow.com/questions/436411/where-should-i-put-script-tags-in-html-markup -->
     <script src="{{ url_for('static', filename='js/app.js')}}"></script>
-    <footer>© 2022. Todos los derechos reservados</footer>
+    <title>my CRYPTO</title>
+</head>
+
+<body>
+    <header>
+        <div class="row">
+            <h3><strong>my Crypto</strong></h3>
+        </div>
+    </header>
+    <section id="lista_ppal" class="container">
+        <h3><strong>LISTA MOVIMIENTOS</strong></h3>
+        <table class="movimientos">
+            <thead>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Origen</th>
+                <th>Importe</th>
+                <th>Destino</th>
+                <th>Importe</th>
+            </thead>
+            <tbody id="tbbody-movimientos">
+                <script>
+                    listaMovimientos();
+                </script>
+            </tbody>
+        </table>
+    </section>
+    <form>
+        <h3><strong>NUEVO MOVIMIENTO</strong></h3>
+        <fieldset>
+            <input type="datetime" name="fecha_hora" id="fecha_hora" hidden>
+            <input type="text" id="id" hidden>
+            <label for="moneda_from"> Origen: <span class="required">*</span> </label>
+            <select name="moneda" id="moneda_origen">
+                <!-- TODO: Las opciones del desplegable idealmente se deberían de sacar de manera dinamica -->
+                <option value="1">--selecciona una opción </option>
+                <option value="EUR">EUR</option>
+                <option value="BTC">BTC</option>
+                <option value="ETH">ETH</option>
+                <option value="BCH">BCH</option>
+                <option value="BNB">BNB</option>
+                <option value="LINK">LINK</option>
+                <option value="LUNA">LUNA</option>
+                <option value="ATOM">ATOM</option>
+                <option value="SOL">SOL</option>
+                <option value="USDT">USDT</option>
+            </select>
+            <label for="moneda_from"> Importe: <span class="required">*</span></label>
+            <input type="number" step="any" placeholder="--introduzca el importe" id="cantidad_origen">
+            <label for="moneda_to"> Destino: <span class="required">*</span></label>
+            <select name="moneda" id="moneda_destino" required>
+                <option value="1">--selecciona una opción </option>
+                <option value="EUR">EUR</option>
+                <option value="BTC">BTC</option>
+                <option value="ETH">ETH</option>
+                <option value="BCH">BCH</option>
+                <option value="BNB">BNB</option>
+                <option value="LINK">LINK</option>
+                <option value="LUNA">LUNA</option>
+                <option value="ATOM">ATOM</option>
+                <option value="SOL">SOL</option>
+                <option value="USDT">USDT</option>
+            </select>
+            <button class="button" type="button" id="boton_calcular" onclick="calcular_tasa_cambio()">
+                <p>Calcular</p>
+                <img src="static\img\outline_calculate_black_24dp.png">
+            </button>
+            <!-- TODO: arreglar foco boton (grayed out) tras click -->
+            <label for="tasa_cambio"> Tasa de cambio actual: </label>
+
+            <input type="number" placeholder="--valor actual" id="tasa" disabled>
+
+            <label for="moneda_to"> Importe: </label>
+            <input type="number" placeholder="--campo calculado" id="cantidad_destino" disabled>
+
+
+            <input class="button-primary" type="reset" id="boton_cancelar" value="Cancelar" onclick="cancelar()">
+            <input class="button-primary" type="submit" onclick="confirmar()" id="boton_confirmar" value="Confirmar">
+            <input type="hidden" name="datetime" id="datetime">
+
+        </fieldset>
+    </form>
+    <section id="status">
+        <h3><strong>STATUS</strong></h3>
+        <fieldset> Invertido: </label>
+            <input type="number" placeholder="--€" id="eur_invertidos" disabled>
+            <fieldset>Valor: </label>
+                <input type="number" placeholder="--€" id="valor_criptos_eur" disabled>
+                <fieldset>Resultado: </label>
+                    <input type="number" placeholder="--€" id="resultado" disabled>
+
+                    <button class="button" onclick="carga_status()">
+                        <p>Refrescar</p>
+                        <img src="static\img\outline_refresh_black_24dp.png">
+                    </button>
+
+                </fieldset>
+
+    </section>
+</body>
+
+<footer>© 2022. Todos los derechos reservados</footer>
 
 </html>

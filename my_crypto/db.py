@@ -1,19 +1,15 @@
-# from asyncio.windows_events import CONNECT_PIPE_INIT_DELAY
 from datetime import date
-from datetime import time
 from datetime import datetime
 import sqlite3
 
-from flask import request
-from config import URL_TASA_ESPECIFICA
-# from criptos.errors import APIError, CONNECT_ERROR
-
 DATABASE_NAME = "my_crypto.db"
+
 
 def get_db():
     conn = sqlite3.connect(DATABASE_NAME)
     conn.row_factory = sqlite3.Row
     return conn
+
 
 def create_tables():
     tables = [
@@ -48,7 +44,7 @@ def insertar_movimiento(from_moneda, from_cantidad, to_moneda, to_cantidad):
     db = get_db()
     cursor = db.cursor()
     fecha = date.today()
-    hora = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+    hora = datetime.now().strftime("%H:%M:%S")
 
     statement = (
         "INSERT INTO movimientos(fecha, hora, from_moneda, from_cantidad,"
@@ -62,7 +58,7 @@ def insertar_movimiento(from_moneda, from_cantidad, to_moneda, to_cantidad):
 def get_todos_movimientos():
     db = get_db()
     cursor = db.cursor()
-    statement = "SELECT * FROM movimientos"
+    statement = "SELECT * FROM movimientos ORDER BY fecha DESC ,hora DESC "
     cursor.execute(statement)
     return cursor.fetchall()
 
@@ -73,17 +69,7 @@ def get_movimiento_by_id(id_):
     statement = "SELECT * FROM movimientos WHERE id = ?"
     cursor.execute(statement, [id_])
     return cursor.fetchall()
-""""
-def date_now():
-    now = datetime.today()
-    fecha = now.strftime("%d/%m/%y")
-    return fecha
 
-def time_now():
-    now = datetime.todaynow()
-    hora = now.strftime("%H:%M:%S")
-    return hora
-"""
 
 def get_saldo(moneda):
     """El saldo de una sola moneda"""
@@ -103,6 +89,7 @@ def get_saldo(moneda):
     cursor.execute(statement, [moneda, moneda])
     return cursor.fetchone()["saldo"]
 
+
 def total_euros_invertidos():
     db = get_db()
     cursor = db.cursor()
@@ -119,38 +106,3 @@ def total_euros_comprados():
     )
     cursor.execute(statement)
     return cursor.fetchone()["total_comprado"]
-
-
-
-def actualiza_status(self, params):
-    db = get_db()
-    cursor = db.cursor()
-    statement = ("""UPDATE status set invertido = ?, valor = ?""", params)
-    cursor.execute(statement)
-    return cursor.fetchall()
-
-""""
-class CriptoValorModel:
-    def __init__(self, apikey, origen = "", destino = ""):
-        self.apikey = apikey
-        self.origen = origen
-        self.destino = destino
-
-        self.tasa = 0.0
-
-    def obtener_tasa(self, time=""):
-        try:
-            respuesta = request.get((URL_TASA_ESPECIFICA.format),
-                self.origen,
-                self.destino,
-                self.apikey
-            )
-        except:
-            raise APIError(CONNECT_ERROR)            
-
-        if respuesta.status_code != 200:
-            #raise APIError(respuesta.status_code, respuesta.json()["error"])
-            raise APIError(respuesta.status_code)
-
-        self.tasa = round(respuesta.json()["rate"], 6)
-"""

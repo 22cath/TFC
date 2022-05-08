@@ -6,3 +6,4 @@ my_crypto/movimientos.db
 .vscode
 node_modules
 init
+my_crypto.db

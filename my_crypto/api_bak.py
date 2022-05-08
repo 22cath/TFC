@@ -148,26 +148,11 @@ def status():
     try:
        
         res = {"status": "success", "data": {"invertido": None, "valor_actual": None}}
-
-        # Invertido €
         res["data"]["invertido"] = total_euros_invertidos()
-        
         saldo_euros = total_euros_comprados() - res["data"]["invertido"]
-
-        # valor_actual_criptos €
-
-        # resultado €
-
+        # print(saldo_euros, total_euros_comprados(), valor_actual_criptos())
         res["data"]["valor_actual"] = valor_actual_criptos() + saldo_euros
-        
-        respuesta = {
-                "status": "success",
-                "data": {"invertido": invertido, "valor_actual": valor_actual, "resultado": resultado,}
-            }
-        return jsonify(respuesta), 200
-        
         return jsonify(res)
-
     except BaseException:
         error_api_response = {
             "status": "fail",
@@ -181,3 +166,48 @@ def resource_not_found(e):
     return jsonify({"status": "fail", "mensaje": "Mensaje de error"}), 400
 
 
+# TESTS
+def test_create_tables():
+    create_tables()
+
+
+# TODO: poner estas funciones en tests
+def test_insert_db_movimiento():
+    from random import random
+    from random import randrange
+    from random import choices
+
+    monedas = ["EUR", "BTC", "ETH", "BCH", "BNB", "LINK", "LUNA", "ATOM", "SOL", "USDT"]
+
+    # esto semanticamente no tiene sentido 100%
+    # TODO hacer bot de compra
+    elegidas = choices(monedas, k=2)  # k =2 => dos diferentes
+    datos = {
+        "fecha": f"2021-01-{randrange(1,10)}",
+        "hora": f"{randrange(1,12)}:00:00",
+        "from_moneda": elegidas[0],
+        "from_cantidad": round(random() * randrange(1, 100), 4),
+        "to_moneda": elegidas[1],
+        "to_cantidad": round(random() * randrange(1, 100), 4),
+    }
+    insertar_movimiento(**datos)
+
+
+def test_consulta():
+    for i in get_todos_movimientos():
+        print(i)
+
+
+#test_create_tables()
+
+# test_consulta()
+
+
+
+# https://flask.palletsprojects.com/en/2.0.x/tutorial/layout/
+# https://flask.palletsprojects.com/en/2.0.x/patterns/packages/
+# https://parzibyte.me/blog/en/2020/11/12/creating-api-rest-with-python-flask-sqlite3/#Creating_the_API_with_Flask_and_Python
+
+# https://hoppscotch.io/ para probar APIs
+# https://flask.palletsprojects.com/en/2.0.x/errorhandling/
+# https://en.wikipedia.org/wiki/Web_API

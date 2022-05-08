@@ -75,11 +75,14 @@ def get_saldo(moneda):
     """El saldo de una sola moneda"""
     db = get_db()
     cursor = db.cursor()
-    statement1 = """SELECT Sum(from_cantidad) * ( -1 ) AS "Saldo"
+
+    # https://stackoverflow.com/questions/13122334/can-ifnull-be-used-with-select-statements-for-a-sum
+
+    statement1 = f"""SELECT IFNULL(SUM(from_cantidad), 0) * ( -1 ) AS "Saldo"
         FROM   movimientos
         WHERE  from_moneda = ? """
 
-    statement2 = """SELECT Sum(to_cantidad) AS "Saldo"
+    statement2 = f"""SELECT IFNULL(SUM(to_cantidad), 0) * ( -1 ) AS "Saldo"
         FROM   movimientos
         WHERE  to_moneda = ? """
 

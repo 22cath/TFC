@@ -1,12 +1,16 @@
 header {
-    padding-left: 30px;
+    padding-left: 35px;
    
     background-color:#9b4dca;
     display: flex;
     position: relative;
-    color: white;
+    color: white; 
  }
- 
+
+ body {
+     padding-left: 30px;
+ }
+
 .required {
     color: #e9405c;
 }
@@ -16,6 +20,7 @@ header {
     overflow-y: auto;
     height: 320px;
 }
+
 
 h3{
     padding-top: 20px;

@@ -5,3 +5,4 @@ venv/
 my_crypto/movimientos.db
 .vscode
 node_modules
+init

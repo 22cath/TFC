@@ -2,8 +2,7 @@
 **__pycache__/
 config.py
 venv/
-my_crypto/movimientos.db
 .vscode
-node_modules
+node_modules/
 init
-my_crypto.db
+*.db 

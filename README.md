@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 Con el comando pip freeze revisar que todas las librerías esten instaladas.
 
-## Crear la base de datos en la terminal
+## Crear la base de datos con el nombre  my_crypto.db en la terminal
 ```
 cd FLASK_JS
 ```
@@ -48,11 +48,13 @@ Para comprobar que la instalacion ha ido bien:
 ```
 .tables
 ```
+```
 .schema
 ```
 ```
 select count (*) from movimientos;  
 ```
+
 Para salir:
 ```
 .q
@@ -72,6 +74,9 @@ En la terminal con el comando
 ```
 flask run
 ```
-Para salir CTRL + C
+Para salir 
+```
+CTRL + C
+```
 
 

@@ -2,7 +2,6 @@ const peticionarioMovimientos = new XMLHttpRequest();
 const requestAPI = new XMLHttpRequest();
 
 
-
 function listaMovimientos() {
     const campos = ['fecha', 'hora', 'from_moneda', 'from_cantidad', 'to_moneda', 'to_cantidad'];
     let url = '/api/v1/movimientos';
@@ -33,7 +32,6 @@ function validar_inputs_tasa_cambio(from_moneda, to_moneda, cantidad_origen) {
         alert("Por favor, rellene todos los campos señalados con un asterisco (*)");
         return false;
     }
-
     if (from_moneda === to_moneda) {
         alert("Las monedas de origen y destino deben ser diferentes.");
         return false;
@@ -42,8 +40,6 @@ function validar_inputs_tasa_cambio(from_moneda, to_moneda, cantidad_origen) {
         alert("Introduzca un número VÁLIDO por favor.");
         return false;
     }
-
-
     return true;
 }
 
@@ -74,8 +70,8 @@ function calcular_tasa_cambio() {
             }
         });
     } else {
-        // TODO
-    }
+        //
+    } 
 }
 
 function confirmar() {
@@ -112,7 +108,11 @@ function confirmar() {
 }
 
 function cancelar() {
-
+    document.getElementById("moneda_origen").value= "1";
+    document.getElementById("cantidad_origen").value= "";
+    document.getElementById("moneda_destino").value= "1";
+    document.getElementById("tasa").value ="";
+    document.getElementById("cantidad_destino").value= "";
 }
 
 

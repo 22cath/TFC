@@ -7,6 +7,7 @@ from flask import render_template
 from flask import jsonify
 from flask import abort
 from flask import request
+from sqlite3 import Error
 
 from my_crypto.db import create_tables
 from my_crypto.db import insertar_movimiento
@@ -29,7 +30,19 @@ def init():
 
 @app.route("/api/v1/movimientos", methods=["GET"])
 def movimientos():
-    movimientos = get_todos_movimientos()
+    try:
+        movimientos = get_todos_movimientos()
+    except Error:
+        return (
+            jsonify(
+                {
+                    "status": "fail",
+                    "mensaje": "Ha habido un problema en la conexión a la base de datos",
+                }
+            ),
+            400,
+        )
+
     json_response = {"status": "success", "data": [dict(row) for row in movimientos]}
     return jsonify(json_response)
 
@@ -54,21 +67,32 @@ def tasa_cambio(from_moneda, to_moneda, from_cantidad):
             "status": "fail",
             "mensaje": f"Se ha producido un error en la consulta a coinApi.io",
         }
-        # TODO: especificar el tipo de error de la consulta en el mensaje a partir del repsonse
         return jsonify(error_api_response), 400
 
     json_response = json.loads(response.read().decode("utf-8"))
-    rate = round(json_response["rate"], 5)
+    rate = json_response["rate"]
     json_response = {"status": "success", "data": {"tipo_cambio": rate}}
     no_saldo_response = {
         "status": "fail",
         "mensaje": f"No tienes suficiente saldo de {from_moneda}",
     }
+    try:
+        if from_moneda != "EUR" and get_saldo(from_moneda) < float(from_cantidad):
+            return jsonify(no_saldo_response), 400
+        else:
+            return jsonify(json_response)
+    except Error:
+        return (
+            jsonify(
+                {
+                    "status": "fail",
+                    "mensaje": "Ha habido un problema en la conexión a la base de datos",
+                }
+            ),
+            400,
+        )
 
-    if from_moneda != "EUR" and get_saldo(from_moneda) < float(from_cantidad):
-        return jsonify(no_saldo_response), 400
-    else:
-        return jsonify(json_response)
+
 
 @app.route("/api/v1/movimiento", methods=["POST"])
 def grabar_movimiento():
@@ -82,9 +106,9 @@ def grabar_movimiento():
     if from_moneda == to_moneda:
         json_response = {
             "status": "fail",
-            "message": "Las monedas deben ser diferentes.",
+            "mensaje": "Las monedas deben ser diferentes.",
         }
-        return jsonify(), 400
+        return jsonify(json_response), 400
     try:
         if from_moneda != "EUR":
             saldo = get_saldo(from_moneda)
@@ -114,7 +138,7 @@ def grabar_movimiento():
             jsonify(
                 {
                     "status": "fail",
-                    "message": "Ha ocurrido un error.",
+                    "mensaje": "Ha ocurrido un error.",
                 }
             ),
             400,
@@ -127,10 +151,7 @@ def valor_actual_criptos():
     api_url = f"https://rest.coinapi.io/v1/exchangerate/EUR/?apikey={api_key}"
     response = urllib.request.urlopen(api_url)
     json_response = json.loads(response.read().decode("utf-8"))
-    # import json
-
-    # with open("my_crypto/rates.json") as f:
-    #     json_response = json.load(f)
+    
 
     total = 0.0
     for rate in json_response["rates"]:
@@ -146,32 +167,18 @@ def valor_actual_criptos():
 @app.route("/api/v1/status", methods=["GET"])
 def status():
     try:
-       
+
         res = {"status": "success", "data": {"invertido": None, "valor_actual": None}}
 
-        # Invertido €
+
         res["data"]["invertido"] = total_euros_invertidos()
-        
-        saldo_euros = total_euros_comprados() - res["data"]["invertido"]
-
-        # valor_actual_criptos €
-
-        # resultado €
-
-        res["data"]["valor_actual"] = valor_actual_criptos() + saldo_euros
-        
-        respuesta = {
-                "status": "success",
-                "data": {"invertido": invertido, "valor_actual": valor_actual, "resultado": resultado,}
-            }
-        return jsonify(respuesta), 200
-        
+        res["data"]["valor_actual"] = valor_actual_criptos() + total_euros_comprados()
         return jsonify(res)
-
-    except BaseException:
+    except BaseException as e:
+        traceback.print_exc()
         error_api_response = {
             "status": "fail",
-            "mensaje": f"Se ha producido un error en el calculo del status",
+            "mensaje": f"Se ha producido un error en el cálculo del status.",
         }
         return jsonify(error_api_response), 400
 

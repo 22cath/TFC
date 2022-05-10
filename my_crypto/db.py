@@ -1,14 +1,9 @@
+import os
 from datetime import date
 from datetime import datetime
 import sqlite3
 
-DATABASE_NAME = "my_crypto.db"
-
-
-def get_db():
-    conn = sqlite3.connect(DATABASE_NAME)
-    conn.row_factory = sqlite3.Row
-    return conn
+DATABASE_NAME = os.environ["DATABASE_NAME"]
 
 
 def create_tables():
@@ -28,6 +23,19 @@ def create_tables():
     cursor = db.cursor()
     for table in tables:
         cursor.execute(table)
+
+
+def create_db():
+    conn = sqlite3.connect(DATABASE_NAME)
+    print(f"Base de datos {DATABASE_NAME} ha sido creada!")
+    return conn
+
+
+def get_db():
+    # https://docs.python.org/3/library/sqlite3.html#sqlite3.connect
+    conn = sqlite3.connect(f"file:{DATABASE_NAME}?mode=rw", uri=True)
+    conn.row_factory = sqlite3.Row
+    return conn
 
 
 def ultimo_id():
@@ -78,11 +86,11 @@ def get_saldo(moneda):
 
     # https://stackoverflow.com/questions/13122334/can-ifnull-be-used-with-select-statements-for-a-sum
 
-    statement1 = f"""SELECT IFNULL(SUM(from_cantidad), 0) * ( -1 ) AS "Saldo"
+    statement1 = f"""SELECT IFNULL(SUM(from_cantidad), 0.0) * ( -1 ) AS "Saldo"
         FROM   movimientos
         WHERE  from_moneda = ? """
 
-    statement2 = f"""SELECT IFNULL(SUM(to_cantidad), 0) * ( -1 ) AS "Saldo"
+    statement2 = f"""SELECT IFNULL(SUM(to_cantidad), 0.0) AS "Saldo"
         FROM   movimientos
         WHERE  to_moneda = ? """
 
@@ -96,7 +104,7 @@ def get_saldo(moneda):
 def total_euros_invertidos():
     db = get_db()
     cursor = db.cursor()
-    statement = """SELECT sum(from_cantidad) AS "total_invertido" FROM movimientos WHERE from_moneda = "EUR" """
+    statement = """SELECT IFNULL(SUM(from_cantidad), 0.0) AS "total_invertido" FROM movimientos WHERE from_moneda = "EUR" """
     cursor.execute(statement)
     return cursor.fetchone()["total_invertido"]
 
@@ -104,8 +112,6 @@ def total_euros_invertidos():
 def total_euros_comprados():
     db = get_db()
     cursor = db.cursor()
-    statement = (
-        """SELECT sum(to_cantidad) AS "total_comprado" FROM movimientos WHERE to_moneda = "EUR" """
-    )
+    statement = """SELECT IFNULL(SUM(to_cantidad), 0.0) AS "total_comprado" FROM movimientos WHERE to_moneda = "EUR" """
     cursor.execute(statement)
     return cursor.fetchone()["total_comprado"]

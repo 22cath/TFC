@@ -8,7 +8,7 @@ function listaMovimientos() {
     let url = '/api/v1/movimientos';
     fetch(url).then((res) => { return res.json() })
         .then((movimientos) => {
-            if (movimientos["status"] == "success") {
+            if (movimientos["status"] === "success") {
                 movimientos["data"].forEach(function (movimiento) {
                     const tbody = document.querySelector("#tbbody-movimientos");
                     const fila = document.createElement('tr');
@@ -19,7 +19,11 @@ function listaMovimientos() {
                     }
                     tbody.appendChild(fila);
                 })
-            } // TODO: else error
+            } else if (movimientos["status"] === "fail") {
+                alert(movimientos["mensaje"]);
+            } else {
+                alert("Se ha producido un error.");
+            }
         });
 }
 
@@ -61,6 +65,7 @@ function calcular_tasa_cambio() {
                 document.getElementById("tasa").value = tasa;
                 var importe = parseFloat(document.getElementById("cantidad_origen").value);
                 document.getElementById("cantidad_destino").value = tasa * importe;
+                document.getElementById("cantidad_origen").disabled = true;
 
             } else if (data["status"] === "fail") {
                 alert(data["mensaje"]);
@@ -85,10 +90,7 @@ function confirmar() {
         "to_moneda": to_moneda,
         "to_cantidad": cantidad_destino
     };
-    // mode: "cors",
-    //from flask_cors import CORS
-    
-    // CORS(app, resources={r'/api/*': {'origins': '*'} }, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'])
+
 
     fetch(url_nuevo_movimiento, {
         method: 'POST',
@@ -101,6 +103,10 @@ function confirmar() {
         .then(data => {
             if (data["status"] == "success") {
                 alert("Se ha grabado un nuevo movimiento correctamente!");
+            } else if (data["status"] == "fail") {
+                alert(data["mensaje"]);
+            } else {
+                alert("Se ha producido un error. Inténtelo en unos instantes.");
             }
         });
 }
@@ -124,9 +130,11 @@ function carga_status() {
             if (resultado < 0) {
                 document.getElementById("resultado").style.color = "red";
             }
+        } else if (data["status"] == "fail") {
+            alert(data["mensaje"]);
         } else {
             alert("Se ha producido un error. Inténtelo en unos instantes.");
-        };
+        }
     });
 }
 

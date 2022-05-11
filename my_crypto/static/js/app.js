@@ -2,6 +2,7 @@ const peticionarioMovimientos = new XMLHttpRequest();
 const requestAPI = new XMLHttpRequest();
 
 
+
 function listaMovimientos() {
     const campos = ['fecha', 'hora', 'from_moneda', 'from_cantidad', 'to_moneda', 'to_cantidad'];
     let url = '/api/v1/movimientos';
@@ -80,33 +81,35 @@ function confirmar() {
     const to_moneda = document.getElementById("moneda_destino").value;
     const cantidad_origen = document.getElementById("cantidad_origen").value;
     const cantidad_destino = document.getElementById("cantidad_destino").value;
-    var url_nuevo_movimiento = '/api/v1/movimiento';
-    const movimiento = {
-        "from_moneda": from_moneda,
-        "from_cantidad": cantidad_origen,
-        "to_moneda": to_moneda,
-        "to_cantidad": cantidad_destino
-    };
-
-
-    fetch(url_nuevo_movimiento, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(movimiento)
-    }).then((res) => { return res.json() })
-        .then(data => {
-            if (data["status"] == "success") {
-                alert("Se ha grabado un nuevo movimiento correctamente!");
-            } else if (data["status"] == "fail") {
-                alert(data["mensaje"]);
-            } else {
-                alert("Se ha producido un error. Inténtelo en unos instantes.");
-            }
-        });
+    var inputs_ok = validar_inputs_tasa_cambio(from_moneda, to_moneda, cantidad_origen);
+    if (inputs_ok) {
+        var url_nuevo_movimiento = '/api/v1/movimiento';
+        const movimiento = {
+            "from_moneda": from_moneda,
+            "from_cantidad": cantidad_origen,
+            "to_moneda": to_moneda,
+            "to_cantidad": cantidad_destino
+        };
+        fetch(url_nuevo_movimiento, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(movimiento)
+        }).then((res) => { return res.json() })
+            .then(data => {
+                if (data["status"] == "success") {
+                    alert("Se ha grabado un nuevo movimiento correctamente!");
+                } else if (data["status"] == "fail") {
+                    alert(data["mensaje"]);
+                } else {
+                    alert("Se ha producido un error. Inténtelo en unos instantes.");
+                }
+            });
+    }
 }
+
 
 function cancelar() {
     document.getElementById("moneda_origen").value= "1";

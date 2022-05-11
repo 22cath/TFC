@@ -1,6 +1,5 @@
 header {
     padding-left: 35px;
-   
     background-color:#9b4dca;
     display: flex;
     position: relative;
@@ -21,6 +20,15 @@ header {
     height: 320px;
 }
 
+thead {
+    background:#eee;
+    text-indent: 10px;
+}
+
+td:last-child,
+td:nth-last-child(3) {
+    text-align: right;
+}
 
 h3{
     padding-top: 20px;
@@ -28,8 +36,7 @@ h3{
 
 .button {
     display: flex;
-    flex-direction: row;
-    
+    flex-direction: row;   
 }
 .button img{
     height: 24px;

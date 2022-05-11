@@ -32,7 +32,7 @@ function validar_inputs_tasa_cambio(from_moneda, to_moneda, cantidad_origen) {
         alert("Por favor, rellene todos los campos señalados con un asterisco (*)");
         return false;
     }
-    if (from_moneda === to_moneda) {
+    if ( from_moneda === to_moneda) {
         alert("Las monedas de origen y destino deben ser diferentes.");
         return false;
     }
@@ -40,9 +40,10 @@ function validar_inputs_tasa_cambio(from_moneda, to_moneda, cantidad_origen) {
         alert("Introduzca un número VÁLIDO por favor.");
         return false;
     }
+
+
     return true;
 }
-
 
 function calcular_tasa_cambio() {
     var infoHTML = document.querySelector("#info");
@@ -70,8 +71,8 @@ function calcular_tasa_cambio() {
             }
         });
     } else {
-        //
-    } 
+        // TODO
+    }
 }
 
 function confirmar() {

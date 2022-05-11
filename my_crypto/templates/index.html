@@ -23,23 +23,25 @@
             <h3><strong>my Crypto</strong></h3>
         </div>
     </header>
-    <section id="lista_ppal" class="container">
+    <section id="lista_ppal" >
         <h3><strong>LISTA MOVIMIENTOS</strong></h3>
-        <table class="movimientos">
-            <thead>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Origen</th>
-                <th>Importe</th>
-                <th>Destino</th>
-                <th>Importe</th>
-            </thead>
-            <tbody id="tbbody-movimientos">
-                <script>
-                    listaMovimientos();
-                </script>
-            </tbody>
-        </table>
+        <div id="tableFixHead">
+            <table class="movimientos">
+                <thead>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Origen</th>
+                    <th>Importe</th>
+                    <th>Destino</th>
+                    <th>Importe</th>
+                </thead>
+                <tbody id="tbbody-movimientos">
+                    <script>
+                        listaMovimientos();
+                    </script>
+                </tbody>
+            </table>
+        </div>
     </section>
     <form id="formulario">
         <h3><strong>NUEVO MOVIMIENTO</strong></h3>

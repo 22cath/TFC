@@ -20,13 +20,7 @@ from my_crypto.db import total_euros_invertidos
 from my_crypto.db import total_euros_comprados
 from my_crypto import app
 from flask import Flask
-#from flask_cors import CORS
 
-
-#CORS(app, resources={r'/api/*': {'origins': '*'} }, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'])
-#cors.header('Access-Control-Allow-Origin: *')
-#cors.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS')
-#cors.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token')
 
 #database_name = app.config.get("DATABASE_NAME")
 
@@ -139,7 +133,6 @@ def grabar_movimiento():
             return jsonify(json_response), 201
         else:
             return jsonify(json_response), 200
-    # Esta es la excepción padre, cuidado! captura todos los errores
     except BaseException as e:
         traceback.print_exc()
         return (

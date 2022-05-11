@@ -72,7 +72,7 @@ function calcular_tasa_cambio() {
             }
         });
     } else {
-        // TODO
+        // 
     }
 }
 

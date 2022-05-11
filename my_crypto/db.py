@@ -2,9 +2,10 @@ import os
 from datetime import date
 from datetime import datetime
 import sqlite3
+#from my_crypto import app
 
 DATABASE_NAME = os.environ["DATABASE_NAME"]
-
+#app.config.get("DATABASE_NAME")
 
 def create_tables():
     tables = [
@@ -29,7 +30,6 @@ def create_db():
     conn = sqlite3.connect(DATABASE_NAME)
     print(f"Base de datos {DATABASE_NAME} ha sido creada!")
     return conn
-
 
 def get_db():
     conn = sqlite3.connect(f"file:{DATABASE_NAME}?mode=rw", uri=True)

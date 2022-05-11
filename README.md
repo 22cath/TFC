@@ -57,19 +57,16 @@ Para salir:
 .q
 ```
 
-## Obtener un APIKEY
-Puede obtener un APIKEY gratis en este link: 
-https://www.coinapi.io/pricing?apikey
-
 ## Configuración
+
+### Obtener un APIKEY
+Puede obtener un APIKEY gratis en este link: 
+https://www.coinapi.io/pricing?apikey  
+
 ### Fichero .env
 Copiar el fichero .env_template  
 Renombrarlo a .env   
-Elegir una de las opciones de FLASK_ENV (FLASK_ENV=development) 
-
-### Fichero config
-Copiar el fichero config_template.py  
-Renombrarlo como config.py  
+Elegir una de las opciones de FLASK_ENV (FLASK_ENV=development)    
 Introducir la ruta de la base de datos en el campo indicado  
 Introducir la clave del APIKEY en el campo indicado
 

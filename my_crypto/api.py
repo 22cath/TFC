@@ -28,7 +28,7 @@ from flask import Flask
 #cors.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS')
 #cors.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token')
 
-#database_name = app.config.get("DATABASEPATH")
+#database_name = app.config.get("DATABASE_NAME")
 
 @app.route("/")
 def init():

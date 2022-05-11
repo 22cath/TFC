@@ -19,7 +19,16 @@ from my_crypto.db import ultimo_id
 from my_crypto.db import total_euros_invertidos
 from my_crypto.db import total_euros_comprados
 from my_crypto import app
+from flask import Flask
+#from flask_cors import CORS
 
+
+#CORS(app, resources={r'/api/*': {'origins': '*'} }, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'])
+#cors.header('Access-Control-Allow-Origin: *')
+#cors.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS')
+#cors.header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token')
+
+#database_name = app.config.get("DATABASEPATH")
 
 @app.route("/")
 def init():
@@ -42,7 +51,6 @@ def movimientos():
             ),
             400,
         )
-
     json_response = {"status": "success", "data": [dict(row) for row in movimientos]}
     return jsonify(json_response)
 
@@ -74,7 +82,7 @@ def tasa_cambio(from_moneda, to_moneda, from_cantidad):
     json_response = {"status": "success", "data": {"tipo_cambio": rate}}
     no_saldo_response = {
         "status": "fail",
-        "mensaje": f"No tienes suficiente saldo de {from_moneda}",
+        "mensaje": f"No tiene suficiente saldo de {from_moneda}",
     }
     try:
         if from_moneda != "EUR" and get_saldo(from_moneda) < float(from_cantidad):
@@ -169,7 +177,6 @@ def status():
     try:
 
         res = {"status": "success", "data": {"invertido": None, "valor_actual": None}}
-
 
         res["data"]["invertido"] = total_euros_invertidos()
         res["data"]["valor_actual"] = valor_actual_criptos() + total_euros_comprados()

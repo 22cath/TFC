@@ -6,15 +6,13 @@ SPA de consulta de la lista de últimos movimientos de compra/venta de criptos (
 # Instrucciones para ejecutar la aplicación 
 
 ## Crear y activar un entorno virtual (opcional)
-
-Copiar el fichero .env_template, renombrarlo a .env y elegir una de las opciones de FLASK_ENV (FLASK_ENV=development)
-
+ 
 Crear el entorno virtual en la consola con el comando:
 
 ```
 python -m venv venv
 ```
-Activar el entorno virtual en la consola 
+Activar el entorno virtual en la consola  
 (comando alternativo para linux/mac: venv/bin/activate):
 
 ```
@@ -22,9 +20,8 @@ venv\Scripts\activate
 ```
 
 ## Instalar las dependencias
-Fichero requirements - 
-Para ello es necesario tener instalado pip.
-
+Fichero requirements  
+Para ello es necesario tener instalado pip.  
 Instalar con:
 
 ```
@@ -44,7 +41,7 @@ sqlite3 my_crypto.db
 .read crea_tablas.sql
 ```
 
-Para comprobar que la instalacion ha ido bien:
+Para comprobar que la instalación ha ido bien:
 ```
 .tables
 ```
@@ -64,9 +61,18 @@ Para salir:
 Puede obtener un APIKEY gratis en este link: 
 https://www.coinapi.io/pricing?apikey
 
-## Fichero .env
-Copiar el fichero .env_template, renombrarlo a .env
-Introducir el APIKEY en el campo indicado.
+## Configuración
+### Fichero .env
+Copiar el fichero .env_template  
+Renombrarlo a .env   
+Elegir una de las opciones de FLASK_ENV (FLASK_ENV=development) 
+
+### Fichero config
+Copiar el fichero config_template.py  
+Renombrarlo como config.py  
+Introducir la ruta de la base de datos en el campo indicado  
+Introducir la clave del APIKEY en el campo indicado
+
 
 # START
 En la terminal con el comando

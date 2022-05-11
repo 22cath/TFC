@@ -32,7 +32,6 @@ def create_db():
 
 
 def get_db():
-    # https://docs.python.org/3/library/sqlite3.html#sqlite3.connect
     conn = sqlite3.connect(f"file:{DATABASE_NAME}?mode=rw", uri=True)
     conn.row_factory = sqlite3.Row
     return conn
@@ -83,8 +82,6 @@ def get_saldo(moneda):
     """El saldo de una sola moneda"""
     db = get_db()
     cursor = db.cursor()
-
-    # https://stackoverflow.com/questions/13122334/can-ifnull-be-used-with-select-statements-for-a-sum
 
     statement1 = f"""SELECT IFNULL(SUM(from_cantidad), 0.0) * ( -1 ) AS "Saldo"
         FROM   movimientos
